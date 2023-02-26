@@ -6,7 +6,7 @@
 
 In a typical git workflow, you update Markdown code with requests from a local (tracking) branch to a remote (origin) branch—your fork from the original (upstream) repo.
 
-- `git push` - sent changes from a local branch to a remote repo
+- `git push` - sends changes from a local tracking branch to a remote (origin) branch, your fork.
 - `git fetch` - get changes from a remote repo into your tracking branch
 - `git pull` - will get changes from a remote branch into your tracking branch and merge them into a local branch
 
