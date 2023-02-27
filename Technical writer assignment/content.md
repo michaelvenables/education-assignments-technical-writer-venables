@@ -1,11 +1,25 @@
 ---
+# Git commands
 
-## Content
+## Syncing local and remote branches
 
-### What is the difference between push, pull, and fetch?
+**What's the difference between git push, git pull, and git fetch commands?**
 
-- `git push` - sent changes from a local branch to a remote repo
-- `git fetch` - get changes from a remote repo into your tracking branch
-- `git pull` - will get changes from a remote branch into your tracking branch and merge them into a local branch
+### Introduction
+In a typical git workflow, you update Markdown code with requests from a local (tracking) branch to a remote (origin) branch—your fork from the original (upstream) repo.
 
-Often `git push` and `git pull` are described as equivalent. This isn't entirely correct, since under the hood `git pull` does two things. `git push` takes our current branch, and checks to see whether or not there is a tracking branch for a remote repository connected to it. If so, our changes are taken from our branch and pushed to the remote branch. This is how code is shared with a remote repository, you can think of it as "make the remote branch resemble my local branch". This will fail if the remote branch has diverged from your local branch: if not all the commits in the remote branch are in your local branch. When this happens, your local branch needs to be synchronized with the remote branch with git pull or git fetch and git merge.`git fetch` again takes our current branch, and checks to see if there is a tracking branch. If so, it looks for changes in the remote branch, and pulls them into the tracking branch. It does not change your local branch. To do that, you'll need to do `git merge origin/master` (for the "master" branch) to merge those changes into your branch - probably also called "master".`git pull` simply does a `git fetch` followed immediately by `git merge`. This is often what we desire to do, but some people prefer to use git fetch followed by git merge to make sure they understand the changes they are merging into their branch before the merge happens.
+- `git push` - sends changes from a local tracking branch to a remote (origin) branch, your fork.
+- `git pull` - retrieves changes from a remote (origin) branch into your local tracking branch and merges them into your local tracking branch, but without letting you review them first.
+- `git fetch` -  retrieves changes from a remote (origin) branch that doesntn't exist in your local tracking branch, but doesn't merge them.
+
+### The git pull and git fetch commands
+Users often conflate `git pull` and `git push` commands as performing the same updating function. The `git push` command takes your current branch and checks if your local tracking branch is connected to your remote (origin) branch. If so, changes you make on your local tracking branch are pushed to your remote (origin) branch—and the code shared with your remote (origin) repository. You're updating your remote (origin) branch to the current state of your local tracking branch.  
+
+### The git push command
+The `git push` command will fail if your local branch falls behind and doesn't contain all the commits in your remote (origin) branch. In this case, your local tracking branch needs to be synchronized with the remote (origin) branch. Use the `git pull` command [see section below](#follow-branch-management-best-practices)— or use the commands `git fetch` and `git merge` to perform the sync operation. 
+
+### The git fetch command
+The `git fetch` command checks your local tracking branch's connection to your remote (origin) branch—searches for changes—gathers them into the tracking branch without merging them. This is useful if you want to update your local tracking branch but aren't yet ready to merge changes. To merge your changed files, use the `git merge origin/main` command (for the `main` branch) to merge changes into your local tracking branch. 
+
+### Follow branch management best practices
+You may prefer to use the `git pull` command. Remember that it performs a `git fetch` operation followed by a `git merge`, and after fetching your commits, automatically merges them into your active tracking branch without letting you review them first. Review your commits before you merge them, if you are unsure about the updates. You may run into conflicts if you don't follow best practices for branch management.
