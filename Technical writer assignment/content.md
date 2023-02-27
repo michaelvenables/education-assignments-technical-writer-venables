@@ -17,3 +17,5 @@ The `git push` command will fail if your local branch falls behind and doesn't c
 The `git fetch` command checks your local tracking branch's connection to your remote (origin) branch—searches for changes—gathers them into the tracking branch without merging them. This is useful if you want to update your local tracking branch but aren't yet ready to merge changes. To merge your changed files, use the `git merge origin/main` command (for the `main` branch) to merge changes into your local tracking branch. 
 
 You may prefer to use the `git pull` command. Remember that it performs a `git fetch` operation followed by a `git merge`, and after fetching your commits, automatically merges them into your active tracking branch without letting you review them first. You may run into conflicts if you don't follow best practices for branch management.
+
+You may prefer to use `git fetch`. It's important to review code changes you're merging into your local tracking branch, per best practice. After you've verified the changes, use `git merge` to integrate your commits into your local tracking branch. 
